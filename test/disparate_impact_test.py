@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 import pandas as pd
-from fairness_metric.disparate_impact import DisparateImpact
+from fairness.metric import *
 
 
 class DisparateImpactTest(unittest.TestCase):
@@ -11,11 +11,10 @@ class DisparateImpactTest(unittest.TestCase):
         salary = np.random.randint(1000, 2000, size=10)
         millionaire = np.random.randint(0, 2, size=10)
         y = np.random.randint(0, 2, size=10)
-        disparate_impact = DisparateImpact()
 
         example_dataframe = pd.DataFrame({'Gender': pd.Series(gender), 'Salary': pd.Series(salary),
                                           'Millionaire': pd.Series(millionaire), 'Y': pd.Series(y)})
-        sensitive_attributes = disparate_impact.return_sensitive_attributes(example_dataframe)
+        sensitive_attributes = return_sensitive_attributes(example_dataframe)
         self.assertEqual(['Gender', 'Millionaire'], sensitive_attributes)
 
     def test_columns_normalization_max_min(self):
@@ -23,14 +22,13 @@ class DisparateImpactTest(unittest.TestCase):
         salary = np.random.randint(1000, 2000, size=10)
         millionaire = np.random.randint(0, 2, size=10)
         y = np.random.randint(0, 2, size=10)
-        disparate_impact = DisparateImpact()
 
         example_dataframe = pd.DataFrame({'Gender': pd.Series(gender), 'Salary': pd.Series(salary),
                                           'Millionaire': pd.Series(millionaire), 'Y': pd.Series(y)})
 
-        max_min_normalized_dataset = disparate_impact.columns_normalization_max_min(example_dataframe,
+        max_min_normalized_dataset = columns_normalization_max_min(example_dataframe,
                                                                                     ['Gender', 'Salary', 'Millionaire'])
-        unique_values = disparate_impact.return_unique_values_for_attribute('Gender', max_min_normalized_dataset)
+        unique_values = return_unique_values_for_attribute('Gender', max_min_normalized_dataset)
         sorted_values_array = unique_values.sort()
         self.assertEqual(0, unique_values[0])
         self.assertEqual(1, unique_values[1])

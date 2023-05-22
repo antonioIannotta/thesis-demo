@@ -1,10 +1,10 @@
 import unittest
-from fairness.fairness import Fairness
-from fairness_metric.equal_opportunity import EqualOpportunity
-from fairness_metric.equalized_odds import EqualizedOdds
-from fairness_metric.disparate_impact import DisparateImpact
-from fairness_metric.prevalence import Prevalence
-from fairness_metric.unbalanced_dataset import UnbalancedDataset
+from fairness import Fairness
+from fairness.metric import EqualOpportunity
+from fairness.metric import EqualizedOdds
+from fairness.metric import DisparateImpact
+from fairness.metric import Prevalence
+from fairness.metric import UnbalancedDataset
 
 
 class FairnessTest(unittest.TestCase):
