@@ -9,7 +9,7 @@ from fairness_metric.disparate_impact import DisparateImpact
 list_metric = ["unbalanced_dataset", "prevalence", "equal_opportunity", "equalized_odds", "disparate_impact"]
 
 
-class Fairness():
+class Fairness:
     def __init__(self, metric) -> None:
         self.metric = metric
 
